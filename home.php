@@ -24,12 +24,16 @@ session_start();  /* Inicia la sesión y permite acceder a la variable */
       <img src="https://cdn-icons-png.flaticon.com/512/7602/7602952.png" alt="Logo" width="40" height="36" class="d-inline-block align-text-top">
       AlojamientoES
     </a>
-    <?php if(isset($_SESSION['nombre_completo'])): ?> <!-- Verifica si existe la variable  -->
-      <span class="navbar-text"> <?php echo $_SESSION['nombre_completo']; ?></span> <!-- Mostrar el nombre del usuario en base de dats -->
-      <a href="logout.php" class="btn btn-outline-light">Cerrar sesión</a> <!-- Enlace para cerrar sesión -->
-    <?php endif; ?> <!-- Si no inicia sesion y no existe la variable de sesión llamda nombre_completo el bloque no se ejecuta y no se muestra  -->
+    <div class="ml-auto">
+      <?php if(isset($_SESSION['nombre_completo'])): ?> <!-- Verifica si existe la variable  -->
+        <span class="navbar-text">  <?php echo $_SESSION['nombre_completo']; ?><!-- Mostrar el nombre del usuario en base de datos -->
+        <a href="logout.php" class="btn btn-outline-secondary btn-sm">Cerrar sesión</a> 
+      <?php endif; ?> <!-- Si no inicia sesión y no existe la variable de sesión llamada nombre_completo, el bloque no se ejecuta y no se muestra  -->
+    </div>
   </div>
 </nav>
+
+
 
 
 </body>
