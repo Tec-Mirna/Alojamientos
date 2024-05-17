@@ -7,58 +7,63 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usuario = $_POST["usuario"];
     $contrasenia = $_POST["contrasenia"];
 
+
     // Realizar la consulta SQL para verificar las credenciales
     $sql = "SELECT * FROM usuarios WHERE usuario = '$usuario' AND contrasenia = '$contrasenia'";
     $result = $conn->query($sql);
 
     // Verificar si los datos son correctos
     if ($result && $result->num_rows > 0) {
-        // Credenciales válidas, establecer variable de sesión y redirigir al usuario al home
-        $_SESSION['logged_in'] = true;
-
-        // obtener el nombre del usuario de la base de datos
-        $row = $result->fetch_assoc();
-        $_SESSION['nombre_completo'] = $row['nombre_completo'];
+      $row = $result->fetch_assoc();
+      $_SESSION['logged_in'] = true;
+      $_SESSION['nombre_completo'] = $row['nombre_completo']; /* Nombre completo del usuario registrado en bd */
+      $_SESSION['id_rol'] = $row['id_rol']; // Guardar id del rol en la sesión
     
-        // Si los datos son correctos dirigir al home
-        header("Location: home.php");
+
+         /* Verificar al id de rol para verificar si es admin o usuariocomún */
+        if ($row['id_rol'] == 1) {
+            header("Location: home.php"); // Vista para usuarios comunes
+        } elseif ($row['id_rol'] == 2) {
+            header("Location: Admin/indexAdmin.php"); // Vista para administradores
+        }
         exit();
-    } else {
-        // En caso que los datos sean incorrectos
+     } else {
+        // Datos incorrectos
         $message = "Usuario o contraseña incorrectos";
-    }
+     }
 }
 
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <title>Form</title>
+     <title>Form</title>
 
     
 
     <style>
         @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
 
-* {
-  box-sizing: border-box;
-}
+      * {
+           box-sizing: border-box;
+       }
 
-body {
-  background-color: steelblue;
-  color: #fff;
-  font-family: 'Muli', sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  overflow: hidden;
-  margin: 0;
-}
+       body {
+         background-color: steelblue;
+         color: #fff;
+         font-family: 'Muli', sans-serif;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+         height: 100vh;
+         overflow: hidden;
+         margin: 0;
+       }
 
 .container {
   background-color: rgba(0, 0, 0, 0.4);
@@ -145,14 +150,14 @@ body {
   transform: translateY(-30px);
 }
 
-    </style>
-  </head>
+</style>
+</head>
   
   <body>
 
-  <?php if(!empty($message)): ?>
-    <div class="alert alert-danger" role="alert"><?php echo $message; ?></div>
-<?php endif; ?>
+    <?php if(!empty($message)): ?>
+       <div class="alert alert-danger" role="alert"><?php echo $message; ?></div>
+    <?php endif; ?>
 
 
 
@@ -161,8 +166,7 @@ body {
       <form action="login.php" method="POST">
         <div class="form-control">
           <input  name="usuario" type="text" required>
-          <label>User</label>
-         
+          <label>User</label> 
         </div>
 
         <div class="form-control">
@@ -170,21 +174,21 @@ body {
           <label>Password</label>
         </div>
 
-        <input type="submit" value="Login"/>
+        <input type="submit" value="Login" class="btn"/>
 
         <p class="text">Don't have an account? <a href="register.php">Register</a> </p>
       </form>
     </div>
     <script >
 
-    const labels = document.querySelectorAll('.form-control label')
+       const labels = document.querySelectorAll('.form-control label')
 
-labels.forEach(label => {
-    label.innerHTML = label.innerText
+       labels.forEach(label => {
+       label.innerHTML = label.innerText
         .split('')
         .map((letter, idx) => `<span style="transition-delay:${idx * 50}ms">${letter}</span>`)
         .join('')
-})
+      })
     </script>
   </body>
 </html>
