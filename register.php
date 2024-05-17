@@ -40,23 +40,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <style>
 
-    @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
- * {
-  box-sizing: border-box;
-}
+            @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
 
-body {
-  background-color: steelblue;
-  color: #fff;
-  font-family: 'Muli', sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  overflow: hidden;
-  margin: 0;
-}
+      * {
+           box-sizing: border-box;
+       }
+
+       body {
+         background-color: steelblue;
+         color: #fff;
+         font-family: 'Muli', sans-serif;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+         height: 100vh;
+         overflow: hidden;
+         margin: 0;
+       }
 
 .container {
   background-color: rgba(0, 0, 0, 0.4);
@@ -164,7 +165,7 @@ body {
             <label>Password</label>
         </div>
 
-        <input type="submit" value="Register"><br><br>
+        <input type="submit" value="Register" class="btn"><br><br>
 
        <a href="login.php"> I have an account</a>
 

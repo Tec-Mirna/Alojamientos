@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
       
         .container{
-            margin: 30px;
+            margin-top: 30px;
         }
    
         .cards{
