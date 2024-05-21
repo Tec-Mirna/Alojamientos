@@ -116,6 +116,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deleteaccomodation"]))
           </a>
           <div class="ml-auto">
               <span class="navbar-text "> Administración </span>
+              <a  href="./addUser.php" class="btn position-relative" style="margin-right: 10px;" >Crear cuenta Administrador</a>
               <a href="../logout.php" class="btn btn-outline-light btn-sm">Cerrar sesión</a> 
               </div>
           </div>
